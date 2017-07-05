@@ -10,7 +10,7 @@ You can modify it for more adjustments.
 
 You can take a look on its implementation: [CircleProgressView.java](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.java)
 
-For those who interested to learn Kotlin you can find same implementation in this language: [CircleProgressViewKt.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressViewKt.kt)
+For those who interested in learning Kotlin you can find same implementation in this language: [CircleProgressViewKt.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressViewKt.kt)
 
 ### How it looks like?
 
