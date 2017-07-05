@@ -51,12 +51,10 @@ progressBar.progress = progressSeekBar.progress
 progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         progressBar.progress = progress
-        if (progress < 40) {
-            progressBar.progressText = "Good"
-        } else if (progress in 40..70) {
-            progressBar.progressText = "Normal"
-        } else {
-            progressBar.progressText = "Bad"
+        progressBar.progressText = when (progress) {
+            in 0..40 -> "Good"
+            in 40..70 -> "Normal"
+            else -> "Bad"
         }
     }
 //...
