@@ -14,31 +14,22 @@ For those who interested in learning Kotlin you can find same implementation in 
 
 ### How it looks like?
 
-**Styles**
-
-```xml
-<style name="CircleProgressStyle">
-    <item name="showGradientProgress">true</item>
-    <item name="progressBackgroundColor">@color/progressBackground</item>
-    <item name="progressPathColor">@color/progressPathColor</item>
-    <item name="startProgressColor">@color/startProgressColor</item>
-    <item name="endProgressColor">@color/endProgressColor</item>
-    <item name="progressStrokeWidth">12dp</item>
-    <item name="roundedProgressStroke">true</item>
-    <item name="progressTextColor">@color/progressTextColor</item>
-    <item name="startAngle">45</item>
-    <item name="endAngle">270</item>
-    <item name="maxProgress">100</item>
-</style>
-```
-
 **Layout**
 ```xml
 <com.ysered.circleprogress.view.CircleProgressViewKt
     android:id="@+id/progressBar"
-    style="@style/CircleProgressStyle"
     android:layout_width="200dp"
-    android:layout_height="200dp" />
+    android:layout_height="200dp"
+    app:roundedProgressStroke="true"
+    app:progressStrokeWidth="12dp"
+    app:showGradientProgress="true"
+    app:startProgressColor="@color/startProgressColor"
+    app:endProgressColor="@color/endProgressColor"
+    app:progressPathColor="@color/progressPathColor"
+    app:progressTextColor="@color/progressTextColor"
+    app:startAngle="45"
+    app:endAngle="270"
+    app:maxProgress="100" />
 ```
 
 **Inside activity**
