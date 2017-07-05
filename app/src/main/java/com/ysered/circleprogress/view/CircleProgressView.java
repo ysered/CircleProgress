@@ -148,6 +148,7 @@ public class CircleProgressView extends View {
             final Shader gradientShader = new SweepGradient(centerX, centerY, colors, null);
             progressPaint.setShader(gradientShader);
             // to start gradient from bottom center instead of right center
+            canvas.save();
             canvas.rotate(90, centerX, centerY);
         } else {
             progressPaint.setColor(startProgressColor);
@@ -156,7 +157,6 @@ public class CircleProgressView extends View {
 
         // progress
         final RectF progressBounds = new RectF(strokeWidth, strokeWidth, diameter, diameter);
-        canvas.save();
         canvas.drawArc(progressBounds, startAngle, endAngle, false, progressPathPaint);
         canvas.drawArc(progressBounds, startAngle, sweepAngle, false, progressPaint);
         canvas.restore();
@@ -172,13 +172,6 @@ public class CircleProgressView extends View {
         int xPos = canvas.getWidth() / 2;
         int yPos = (canvas.getHeight() / 2) + (bounds.height() / 2);
 
-        if (showGradientProgress) {
-            canvas.save();
-            canvas.rotate(-90, getWidth() / 2, getHeight() / 2);
-            canvas.drawText(text, xPos, yPos, textPaint);
-            canvas.restore();
-        } else {
-            canvas.drawText(text, xPos, yPos, textPaint);
-        }
+        canvas.drawText(text, xPos, yPos, textPaint);
     }
 }

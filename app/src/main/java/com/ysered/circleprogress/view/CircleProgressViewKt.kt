@@ -138,6 +138,7 @@ class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr:
             val gradientShader = SweepGradient(centerX.toFloat(), centerY.toFloat(), colors, null)
             progressPaint.shader = gradientShader
             // to start gradient from bottom center instead of right center
+            canvas.save()
             canvas.rotate(90f, centerX.toFloat(), centerY.toFloat())
         } else {
             progressPaint.color = startProgressColor
@@ -145,7 +146,6 @@ class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr:
 
         // progress
         val progressBounds = RectF(progressStrokeWidth, progressStrokeWidth, diameter.toFloat(), diameter.toFloat())
-        canvas.save()
         canvas.drawArc(progressBounds, startAngle, endAngle, false, progressPathPaint)
         canvas.drawArc(progressBounds, startAngle, sweepAngle, false, progressPaint)
         canvas.restore()
@@ -161,13 +161,6 @@ class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr:
         val xPos = canvas.width / 2
         val yPos = canvas.height / 2 + bounds.height() / 2
 
-        if (showGradientProgress) {
-            canvas.save()
-            canvas.rotate(-90f, (width / 2).toFloat(), (height / 2).toFloat())
-            canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)
-            canvas.restore()
-        } else {
-            canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)
-        }
+        canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)
     }
 }
