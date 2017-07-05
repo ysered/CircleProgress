@@ -41,4 +41,25 @@ For those who interested to lean Kotlin you can find same implementation in this
         android:layout_height="200dp" />
 ```
 
+**Inside activity**
+```kotlin
+    //...   
+    val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
+    val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
+    progressBar.progress = progressSeekBar.progress
+
+    progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            progressBar.progress = progress
+            if (progress < 40) {
+                progressBar.progressText = "Good"
+            } else if (progress in 40..70) {
+                progressBar.progressText = "Normal"
+            } else {
+                progressBar.progressText = "Bad"
+            }
+        }
+    //...
+```
+
 ![Progress View](http://i.imgur.com/eYjHRv5.png "Progress View")
