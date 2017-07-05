@@ -17,49 +17,49 @@ For those who interested to lean Kotlin you can find same implementation in this
 **Styles**
 
 ```xml
-    <style name="CircleProgressStyle">
-        <item name="showGradientProgress">true</item>
-        <item name="progressBackgroundColor">@color/progressBackground</item>
-        <item name="progressPathColor">@color/progressPathColor</item>
-        <item name="startProgressColor">@color/startProgressColor</item>
-        <item name="endProgressColor">@color/endProgressColor</item>
-        <item name="progressStrokeWidth">12dp</item>
-        <item name="roundedProgressStroke">true</item>
-        <item name="progressTextColor">@color/progressTextColor</item>
-        <item name="startAngle">45</item>
-        <item name="endAngle">270</item>
-        <item name="maxProgress">100</item>
-    </style>
+<style name="CircleProgressStyle">
+    <item name="showGradientProgress">true</item>
+    <item name="progressBackgroundColor">@color/progressBackground</item>
+    <item name="progressPathColor">@color/progressPathColor</item>
+    <item name="startProgressColor">@color/startProgressColor</item>
+    <item name="endProgressColor">@color/endProgressColor</item>
+    <item name="progressStrokeWidth">12dp</item>
+    <item name="roundedProgressStroke">true</item>
+    <item name="progressTextColor">@color/progressTextColor</item>
+    <item name="startAngle">45</item>
+    <item name="endAngle">270</item>
+    <item name="maxProgress">100</item>
+</style>
 ```
 
 **Layout**
 ```xml
-    <com.ysered.circleprogress.view.CircleProgressViewKt
-        android:id="@+id/progressBar"
-        style="@style/CircleProgressStyle"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
+<com.ysered.circleprogress.view.CircleProgressViewKt
+    android:id="@+id/progressBar"
+    style="@style/CircleProgressStyle"
+    android:layout_width="200dp"
+    android:layout_height="200dp" />
 ```
 
 **Inside activity**
 ```kotlin
-    //...   
-    val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
-    val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
-    progressBar.progress = progressSeekBar.progress
+//...   
+val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
+val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
+progressBar.progress = progressSeekBar.progress
 
-    progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            progressBar.progress = progress
-            if (progress < 40) {
-                progressBar.progressText = "Good"
-            } else if (progress in 40..70) {
-                progressBar.progressText = "Normal"
-            } else {
-                progressBar.progressText = "Bad"
-            }
+progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        progressBar.progress = progress
+        if (progress < 40) {
+            progressBar.progressText = "Good"
+        } else if (progress in 40..70) {
+            progressBar.progressText = "Normal"
+        } else {
+            progressBar.progressText = "Bad"
         }
-    //...
+    }
+//...
 ```
 
 ![Progress View](http://i.imgur.com/eYjHRv5.png "Progress View")
