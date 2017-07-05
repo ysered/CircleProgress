@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <com.ysered.circleprogress.view.CircleProgressView
+        <com.ysered.circleprogress.view.CircleProgressViewKt
             android:id="@+id/progressBar"
             style="@style/CircleProgressStyle"
             android:layout_width="match_parent"

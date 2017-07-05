@@ -1,9 +1,9 @@
 package com.ysered.circleprogress
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.SeekBar
-import com.ysered.circleprogress.view.CircleProgressView
+import com.ysered.circleprogress.view.CircleProgressViewKt
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,19 +11,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressBar = findViewById(R.id.progressBar) as CircleProgressView
+        val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
         val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
-        progressBar.setProgress(progressSeekBar.progress)
+        progressBar.progress = progressSeekBar.progress
 
         progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                progressBar.setProgress(progress)
+                progressBar.progress = progress
                 if (progress < 40) {
-                    progressBar.setText("Good")
+                    progressBar.progressText = "Good"
                 } else if (progress in 40..70) {
-                    progressBar.setText("Normal")
+                    progressBar.progressText = "Normal"
                 } else {
-                    progressBar.setText("Bad")
+                    progressBar.progressText = "Bad"
                 }
             }
 
