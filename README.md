@@ -53,4 +53,6 @@ progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListe
 //...
 ```
 
-![Progress View](http://i.imgur.com/eYjHRv5.png "Progress View")
+<p align="center">
+    <img alt="Progress View" src="http://i.imgur.com/eYjHRv5.png" />
+</p>
