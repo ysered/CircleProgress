@@ -71,14 +71,14 @@ public class CircleProgressView extends View {
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleProgressView, defStyleAttr, 0);
         try {
-            backgroundColor = a.getColor(R.styleable.CircleProgressView_backgroundColor, Color.WHITE);
+            backgroundColor = a.getColor(R.styleable.CircleProgressView_progressBackgroundColor, Color.WHITE);
             showGradientProgress = a.getBoolean(R.styleable.CircleProgressView_showGradientProgress, false);
             startProgressColor = a.getColor(R.styleable.CircleProgressView_startProgressColor, Color.BLACK);
             endProgressColor = a.getColor(R.styleable.CircleProgressView_endProgressColor, Color.BLACK);
             progressPathColor = a.getColor(R.styleable.CircleProgressView_progressPathColor, Color.LTGRAY);
             strokeWidth = a.getDimension(R.styleable.CircleProgressView_progressStrokeWidth, DEFAULT_PROGRESS_STROKE_WIDTH);
             isRoundedStroke = a.getBoolean(R.styleable.CircleProgressView_roundedProgressStroke, true);
-            textColor = a.getColor(R.styleable.CircleProgressView_textColor, Color.BLACK);
+            textColor = a.getColor(R.styleable.CircleProgressView_progressTextColor, Color.BLACK);
             startAngle = a.getFloat(R.styleable.CircleProgressView_startAngle, DEFAULT_START_PROGRESS_ANGLE);
             endAngle = a.getFloat(R.styleable.CircleProgressView_endAngle, DEFAULT_END_PROGRESS_ANGLE);
             maxProgress = a.getInt(R.styleable.CircleProgressView_maxProgress, DEFAULT_MAX_PROGRESS);
