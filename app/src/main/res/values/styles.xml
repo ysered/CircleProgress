@@ -1,11 +1,21 @@
 <resources>
-
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CircleProgressStyle">
+        <item name="roundedProgressStroke">true</item>
+        <item name="showGradientProgress">true</item>
+        <item name="backgroundColor">@color/progressBackground</item>
+        <item name="startProgressColor">@color/startProgressColor</item>
+        <item name="progressPathColor">@color/progressPathColor</item>
+        <item name="endProgressColor">@color/endProgressColor</item>
+        <item name="textColor">@color/progressTextColor</item>
+        <item name="progressStrokeWidth">12dp</item>
+        <item name="startAngle">45</item>
+        <item name="endAngle">270</item>
+        <item name="maxProgress">100</item>
+    </style>
 </resources>

@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Progress view colors -->
+    <color name="progressBackground">#ffffff</color>
+    <color name="startProgressColor">#258000</color>
+    <color name="endProgressColor">#b9000d</color>
+    <color name="progressPathColor">#aeaeae</color>
+    <color name="progressTextColor">#7e7e7e</color>
 </resources>
