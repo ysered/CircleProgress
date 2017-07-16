@@ -21,5 +21,6 @@
         <attr name="selectedColor" format="color"/>
         <attr name="actionText" format="string"/>
         <attr name="actionTextSize" format="dimension"/>
+        <attr name="progressTextSize" format="dimension"/>
     </declare-styleable>
 </resources>

@@ -24,6 +24,7 @@
         <item name="selectedColor">#e46868</item>
         <item name="actionText">START</item>
         <item name="actionTextSize">20sp</item>
+        <item name="progressTextSize">40sp</item>
     </style>
 
 </resources>

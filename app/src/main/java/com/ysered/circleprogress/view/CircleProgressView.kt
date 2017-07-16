@@ -15,25 +15,43 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
 
     constructor(context: Context) : this(context, null)
 
+    // defaults
     private val DP_IN_PX = Resources.getSystem().displayMetrics.density
     private val DEFAULT_PROGRESS_STROKE_WIDTH = 16 * DP_IN_PX
 
-    // dimens
+    // coordinates
     private var progressX = 0f
     private var progressY = 0f
     private var progressRadius = 0f
+    private var textX: Float = 0f
+    private var progressTextY = 0f
+    private var actionTextY: Float = 0f
 
-    // progress
+    // dimens
+    private val progressTextSize: Float
+    private val actionTextSize: Float
     private val progressStrokeWidth: Float
-    private val progressPathPaint: Paint
-    private val progressTextPaint: Paint
 
     // action text
-    private var actionTextX: Float = 0f
-    private var actionTextY: Float = 0f
-    private val actionText: String
-    private val actionTextSize: Float
+    private val progressPathPaint: Paint
+    private val progressTextPaint: Paint
     private val actionTextPaint: Paint
+
+    /**
+     * Current progress text (e.g. 50%, Running, Off, etc.)
+     */
+    var progressText: String = ""
+        set(value) {
+            if (value.isNotEmpty()) {
+                field = value
+                invalidate()
+            }
+        }
+
+    /**
+     * Current action for progress view (e.g. start, stop, etc.)
+     */
+    var actionText: String
 
     init {
         val array = context.obtainStyledAttributes(attrs, R.styleable.CircleProgressView, defStyleAttr, 0)
@@ -41,6 +59,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         actionText = array.getString(R.styleable.CircleProgressView_actionText) ?: ""
         actionTextSize = array.getDimension(R.styleable.CircleProgressView_actionTextSize, 32f)
         val selectedColor = array.getColor(R.styleable.CircleProgressView_selectedColor, Color.RED)
+        progressTextSize = array.getDimension(R.styleable.CircleProgressView_progressTextSize, 32f)
         array.recycle()
 
         progressPathPaint = Paint().apply {
@@ -53,14 +72,13 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         progressTextPaint = Paint().apply {
             isAntiAlias = true
             color = Color.LTGRAY
-        }
-
-        actionTextPaint = Paint().apply {
-            isAntiAlias = true
-            color = Color.LTGRAY
             strokeWidth = 0f
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            textSize = progressTextSize
+        }
+
+        actionTextPaint = Paint(progressTextPaint).apply {
             textSize = actionTextSize
         }
 
@@ -92,21 +110,29 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         val viewWidth = layoutParams.width.toFloat()
         val viewHeight = layoutParams.height.toFloat()
 
-        progressX = viewWidth / 2f
+        (viewWidth / 2f).let {
+            progressX = it
+            textX = it
+        }
         progressY = viewHeight / 2f
         progressRadius = progressX - progressStrokeWidth
 
-        val textBounds = Rect()
-        actionTextPaint.getTextBounds(actionText, 0, actionText.length, textBounds)
+        // progress text
+        val progressTextBounds = Rect()
+        progressTextPaint.getTextBounds(progressText, 0, progressText.length, progressTextBounds)
+        progressTextY = viewHeight / 2f + progressTextBounds.height() / 2f
 
-        actionTextX = viewWidth / 2f
-        actionTextY = viewHeight - textBounds.height() * 2f
+        // action text
+        val actionTextBounds = Rect()
+        actionTextPaint.getTextBounds(actionText, 0, actionText.length, actionTextBounds)
+        actionTextY = viewHeight - actionTextBounds.height() * 2f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawCircle(progressX, progressY, progressRadius, progressPathPaint)
-        canvas.drawText(actionText, actionTextX, actionTextY, actionTextPaint)
+        canvas.drawText(progressText, textX, progressTextY, progressTextPaint)
+        canvas.drawText(actionText, textX, actionTextY, actionTextPaint)
     }
 
 }
