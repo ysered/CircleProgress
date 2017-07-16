@@ -4,13 +4,14 @@ import android.content.Context
 import android.graphics.*
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.ysered.circleprogress.R
 
 /**
  * Custom view to show circular progress.
  */
-class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
+class SemiCircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
     : View(context, attrs, defStyleAttr) {
 
     // defaults
@@ -47,19 +48,19 @@ class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr:
     private var viewHeight: Int = 0
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.CircleProgressView, defStyleAttr, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.SemiCircleProgressView, defStyleAttr, 0)
         try {
-            progressBackgroundColor = a.getColor(R.styleable.CircleProgressView_progressBackgroundColor, Color.WHITE)
-            showGradientProgress = a.getBoolean(R.styleable.CircleProgressView_showGradientProgress, false)
-            startProgressColor = a.getColor(R.styleable.CircleProgressView_startProgressColor, Color.BLACK)
-            endProgressColor = a.getColor(R.styleable.CircleProgressView_endProgressColor, Color.BLACK)
-            progressPathColor = a.getColor(R.styleable.CircleProgressView_progressPathColor, Color.LTGRAY)
-            progressStrokeWidth = a.getDimension(R.styleable.CircleProgressView_progressStrokeWidth, DEFAULT_PROGRESS_STROKE_WIDTH)
-            isRoundedStroke = a.getBoolean(R.styleable.CircleProgressView_roundedProgressStroke, true)
-            progressTextColor = a.getColor(R.styleable.CircleProgressView_progressTextColor, Color.BLACK)
-            startAngle = a.getFloat(R.styleable.CircleProgressView_startAngle, DEFAULT_START_PROGRESS_ANGLE)
-            endAngle = a.getFloat(R.styleable.CircleProgressView_endAngle, DEFAULT_END_PROGRESS_ANGLE)
-            maxProgress = a.getInt(R.styleable.CircleProgressView_maxProgress, DEFAULT_MAX_PROGRESS)
+            progressBackgroundColor = a.getColor(R.styleable.SemiCircleProgressView_progressBackgroundColor, Color.WHITE)
+            showGradientProgress = a.getBoolean(R.styleable.SemiCircleProgressView_showGradientProgress, false)
+            startProgressColor = a.getColor(R.styleable.SemiCircleProgressView_startProgressColor, Color.BLACK)
+            endProgressColor = a.getColor(R.styleable.SemiCircleProgressView_endProgressColor, Color.BLACK)
+            progressPathColor = a.getColor(R.styleable.SemiCircleProgressView_progressPathColor, Color.LTGRAY)
+            progressStrokeWidth = a.getDimension(R.styleable.SemiCircleProgressView_progressStrokeWidth, DEFAULT_PROGRESS_STROKE_WIDTH)
+            isRoundedStroke = a.getBoolean(R.styleable.SemiCircleProgressView_roundedProgressStroke, true)
+            progressTextColor = a.getColor(R.styleable.SemiCircleProgressView_progressTextColor, Color.BLACK)
+            startAngle = a.getFloat(R.styleable.SemiCircleProgressView_startAngle, DEFAULT_START_PROGRESS_ANGLE)
+            endAngle = a.getFloat(R.styleable.SemiCircleProgressView_endAngle, DEFAULT_END_PROGRESS_ANGLE)
+            maxProgress = a.getInt(R.styleable.SemiCircleProgressView_maxProgress, DEFAULT_MAX_PROGRESS)
         } finally {
             a.recycle()
         }
@@ -119,6 +120,7 @@ class CircleProgressViewKt(context: Context, attrs: AttributeSet?, defStyleAttr:
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        Log.d(this::class.java.name, "Draw custom view!")
         drawProgress(canvas)
         if (isShowText) {
             drawText(canvas, progressText)

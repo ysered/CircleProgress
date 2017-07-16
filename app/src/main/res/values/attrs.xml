@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CircleProgressView">
+    <declare-styleable name="SemiCircleProgressView">
         <attr name="showGradientProgress" format="boolean" />
         <attr name="progressBackgroundColor" format="color" />
         <attr name="progressPathColor" format="color" />
