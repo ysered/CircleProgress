@@ -8,15 +8,13 @@ You can modify it for more adjustments.
 * progress line width
 * progress text
 
-You can take a look on its implementation: [CircleProgressView.java](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.java)
-
-For those who interested in learning Kotlin you can find same implementation in this language: [CircleProgressViewKt.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressViewKt.kt)
+You can take a look on its implementation: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt)
 
 ### How it looks like?
 
 **Layout**
 ```xml
-<com.ysered.circleprogress.view.CircleProgressViewKt
+<com.ysered.circleprogress.view.SemiCircleProgressView
     android:id="@+id/progressBar"
     android:layout_width="200dp"
     android:layout_height="200dp"
@@ -35,7 +33,7 @@ For those who interested in learning Kotlin you can find same implementation in 
 **Inside activity**
 ```kotlin
 //...   
-val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
+val progressBar = findViewById(R.id.progressBar) as SemiCircleProgressView
 val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
 progressBar.progress = progressSeekBar.progress
 
