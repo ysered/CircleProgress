@@ -120,7 +120,6 @@ class SemiCircleProgressView(context: Context, attrs: AttributeSet?, defStyleAtt
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        Log.d(this::class.java.name, "Draw custom view!")
         drawProgress(canvas)
         if (isShowText) {
             drawText(canvas, progressText)
