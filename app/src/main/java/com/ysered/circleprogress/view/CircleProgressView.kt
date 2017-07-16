@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.ysered.circleprogress.R
+import com.ysered.circleprogress.debug
 
 class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
     : View(context, attrs, defStyleAttr) {
@@ -20,6 +21,8 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private val DEFAULT_PROGRESS_STROKE_WIDTH = 16 * DP_IN_PX
 
     // coordinates
+    private lateinit var progressBounds: RectF
+    private var sweepAngle: Float = 0f
     private var progressX = 0f
     private var progressY = 0f
     private var progressRadius = 0f
@@ -32,10 +35,22 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private val actionTextSize: Float
     private val progressStrokeWidth: Float
 
-    // action text
+    // paints
+    private val progressPaint: Paint
     private val progressPathPaint: Paint
     private val progressTextPaint: Paint
     private val actionTextPaint: Paint
+
+    /**
+     * Represents current progress from 0 to 100.
+     */
+    var progress: Int = 0
+        set(value) {
+            field = value
+            sweepAngle = 360f / 100f * progress
+            debug("Sweep angle: $sweepAngle")
+            invalidate()
+        }
 
     /**
      * Current progress text (e.g. 50%, Running, Off, etc.)
@@ -44,6 +59,30 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         set(value) {
             if (value.isNotEmpty()) {
                 field = value
+                invalidate()
+            }
+        }
+
+    /**
+     * Current color for progress text.
+     */
+    var progressTextColor: Int = Color.LTGRAY
+        set(value) {
+            if (field != value) {
+                field = value
+                progressTextPaint.color = value
+                invalidate()
+            }
+        }
+
+    /**
+     * Progress stroke color.
+     */
+    var progressColor: Int = Color.BLUE
+        set(value) {
+            if (field != value) {
+                field = value
+                progressPaint.color = value
                 invalidate()
             }
         }
@@ -61,6 +100,14 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         val selectedColor = array.getColor(R.styleable.CircleProgressView_selectedColor, Color.RED)
         progressTextSize = array.getDimension(R.styleable.CircleProgressView_progressTextSize, 32f)
         array.recycle()
+
+        progressPaint = Paint().apply {
+            isAntiAlias = true
+            color = progressColor
+            style = Paint.Style.STROKE
+            strokeCap = Paint.Cap.ROUND
+            strokeWidth = progressStrokeWidth
+        }
 
         progressPathPaint = Paint().apply {
             isAntiAlias = true
@@ -110,6 +157,11 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         val viewWidth = layoutParams.width.toFloat()
         val viewHeight = layoutParams.height.toFloat()
 
+        // progress arc bounds
+        val arcStart = progressStrokeWidth
+        val arcEnd = viewWidth - arcStart
+        progressBounds = RectF(arcStart, arcStart, arcEnd, arcEnd)
+
         (viewWidth / 2f).let {
             progressX = it
             textX = it
@@ -131,6 +183,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawCircle(progressX, progressY, progressRadius, progressPathPaint)
+        canvas.drawArc(progressBounds, 90f, sweepAngle, false, progressPaint)
         canvas.drawText(progressText, textX, progressTextY, progressTextPaint)
         canvas.drawText(actionText, textX, actionTextY, actionTextPaint)
     }

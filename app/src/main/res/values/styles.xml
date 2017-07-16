@@ -25,6 +25,7 @@
         <item name="actionText">START</item>
         <item name="actionTextSize">20sp</item>
         <item name="progressTextSize">40sp</item>
+        <item name="progressTextColor">@color/progressPathColor</item>
     </style>
 
 </resources>
