@@ -1,13 +1,15 @@
 package com.ysered.circleprogress.view
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import com.ysered.circleprogress.R
-import com.ysered.circleprogress.debug
 
 class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
     : View(context, attrs, defStyleAttr) {
@@ -41,15 +43,23 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private val progressTextPaint: Paint
     private val actionTextPaint: Paint
 
+    private val animationInterpolator by lazy { DecelerateInterpolator() }
+
     /**
      * Represents current progress from 0 to 100.
      */
     var progress: Int = 0
         set(value) {
             field = value
-            sweepAngle = 360f / 100f * progress
-            debug("Sweep angle: $sweepAngle")
-            invalidate()
+            ValueAnimator.ofFloat(sweepAngle, 360f / 100f * progress).apply {
+                interpolator = animationInterpolator
+                duration = 300 // TODO: move to properties
+                addUpdateListener { animation ->
+                    sweepAngle = animation.animatedValue as Float
+                    invalidate()
+                }
+                start()
+            }
         }
 
     /**
@@ -64,26 +74,23 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         }
 
     /**
-     * Current color for progress text.
-     */
-    var progressTextColor: Int = Color.LTGRAY
-        set(value) {
-            if (field != value) {
-                field = value
-                progressTextPaint.color = value
-                invalidate()
-            }
-        }
-
-    /**
      * Progress stroke color.
      */
     var progressColor: Int = Color.BLUE
         set(value) {
             if (field != value) {
+                ValueAnimator.ofObject(ArgbEvaluator(), field, value).apply {
+                    interpolator = DecelerateInterpolator() // TODO: create once?
+                    duration = 300 // TODO: move to properties
+                    addUpdateListener {
+                        val colorValue = animatedValue as Int
+                        progressPaint.color = colorValue
+                        progressTextPaint.color = colorValue
+                        invalidate()
+                    }
+                    start()
+                }
                 field = value
-                progressPaint.color = value
-                invalidate()
             }
         }
 
@@ -139,7 +146,6 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
                 }
                 MotionEvent.ACTION_UP -> {
                     progressPathPaint.color = Color.LTGRAY
-                    actionTextPaint.color = Color.LTGRAY
                     invalidate()
                     true
                 }

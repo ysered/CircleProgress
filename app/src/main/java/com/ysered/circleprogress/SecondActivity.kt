@@ -26,7 +26,6 @@ class SecondActivity : AppCompatActivity() {
                 progressBar.apply {
                     this.progress = progress
                     progressColor = color
-                    progressTextColor = color
                     progressText = text
                 }
             }
