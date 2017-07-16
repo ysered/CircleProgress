@@ -8,7 +8,7 @@ You can modify it for more adjustments.
 * progress line width
 * progress text
 
-You can take a look on its implementation: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt)
+You can take a look on its implementation: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt)
 
 ### How it looks like?
 
