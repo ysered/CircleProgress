@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="progressStrokeWidth" format="dimension"/>
+
     <declare-styleable name="SemiCircleProgressView">
-        <attr name="showGradientProgress" format="boolean" />
-        <attr name="progressBackgroundColor" format="color" />
-        <attr name="progressPathColor" format="color" />
-        <attr name="startProgressColor" format="color" />
-        <attr name="endProgressColor" format="color" />
-        <attr name="progressStrokeWidth" format="dimension" />
-        <attr name="roundedProgressStroke" format="boolean" />
-        <attr name="progressTextColor" format="color" />
-        <attr name="startAngle" format="float" />
-        <attr name="endAngle" format="float" />
-        <attr name="maxProgress" format="integer" />
+        <attr name="showGradientProgress" format="boolean"/>
+        <attr name="progressBackgroundColor" format="color"/>
+        <attr name="progressPathColor" format="color"/>
+        <attr name="startProgressColor" format="color"/>
+        <attr name="endProgressColor" format="color"/>
+        <attr name="progressStrokeWidth"/>
+        <attr name="roundedProgressStroke" format="boolean"/>
+        <attr name="progressTextColor" format="color"/>
+        <attr name="startAngle" format="float"/>
+        <attr name="endAngle" format="float"/>
+        <attr name="maxProgress" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="progressStrokeWidth"/>
+        <attr name="selectedColor" format="color"/>
+        <attr name="actionText" format="string"/>
+        <attr name="actionTextSize" format="dimension"/>
     </declare-styleable>
 </resources>

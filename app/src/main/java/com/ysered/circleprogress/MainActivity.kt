@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         val activityClass = when (view.id) {
             R.id.firstButton -> FirstActivity::class.java
-            R.id.secondButton -> TODO("Add handler for second button")
+            R.id.secondButton -> SecondActivity::class.java
             else -> throw RuntimeException("OnClick for ${view.id} not implemented")
         }
         startActivity(Intent(this, activityClass))

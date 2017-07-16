@@ -5,19 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ysered.circleprogress.FirstActivity"
+    android:background="#939292"
+    tools:context="com.ysered.circleprogress.SecondActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
-    <com.ysered.circleprogress.view.SemiCircleProgressView
+    <com.ysered.circleprogress.view.CircleProgressView
         android:id="@+id/progressBar"
-        style="@style/SemiCircleProgressStyle"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        style="@style/CircleProgressStyle"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:progressStrokeWidth="4dp"
         tools:layout_editor_absoluteX="92dp"/>
 
     <SeekBar
