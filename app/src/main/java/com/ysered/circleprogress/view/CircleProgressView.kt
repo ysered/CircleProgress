@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.ysered.circleprogress.R
+import com.ysered.circleprogress.debug
 
 class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
     : View(context, attrs, defStyleAttr) {
@@ -130,11 +131,11 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             strokeWidth = 0f
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textSize = progressTextSize
+            textSize = progressTextSize // TODO: adjust to fit view's bounds if it too large
         }
 
         actionTextPaint = Paint(progressTextPaint).apply {
-            textSize = actionTextSize
+            textSize = actionTextSize // TODO: adjust to fit view's bounds if it too large
         }
 
         setOnTouchListener(OnTouchListener { _, motionEvent: MotionEvent? ->
