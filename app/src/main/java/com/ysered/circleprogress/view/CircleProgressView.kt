@@ -135,11 +135,12 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             color = unselectedColor
             strokeWidth = 0f
             textAlign = Paint.Align.CENTER
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create("sans-serif-light", Typeface.NORMAL)
             textSize = progressTextSize // TODO: adjust to fit view's bounds if it too large
         }
 
         actionTextPaint = Paint(progressTextPaint).apply {
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             textSize = actionTextSize // TODO: adjust to fit view's bounds if it too large
         }
 
