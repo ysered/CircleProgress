@@ -1,6 +1,7 @@
 package com.ysered.circleprogress.view
 
 import android.animation.ArgbEvaluator
+import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
@@ -83,17 +84,11 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     var progressColor: Int = Color.BLUE
         set(value) {
             if (field != value) {
-                ValueAnimator.ofObject(ArgbEvaluator(), field, value).apply {
-                    interpolator = animationInterpolator
-                    duration = colorAnimDuration
-                    addUpdateListener {
-                        val colorValue = animatedValue as Int
-                        progressPaint.color = colorValue
-                        progressTextPaint.color = colorValue
-                        invalidate()
-                    }
-                    start()
-                }
+                animateColorChange(field, value, { color ->
+                    progressPaint.color = color
+                    progressTextPaint.color = color
+                    invalidate()
+                })
                 field = value
             }
         }
@@ -147,17 +142,19 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         setOnTouchListener(OnTouchListener { _, motionEvent: MotionEvent? ->
             return@OnTouchListener when (motionEvent?.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    progressPathPaint.color = selectedColor
-                    actionTextPaint.color = selectedColor
-                    isDrawProgress = false
-                    invalidate()
+                    animateColorChange(unselectedColor, selectedColor, { color ->
+                        progressPathPaint.color = color
+                        actionTextPaint.color = color
+                        isDrawProgress = false
+                    })
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    progressPathPaint.color = unselectedColor
-                    actionTextPaint.color = unselectedColor
-                    isDrawProgress = true
-                    invalidate()
+                    animateColorChange(selectedColor, unselectedColor, { color ->
+                        progressPathPaint.color = color
+                        actionTextPaint.color = color
+                        isDrawProgress = true
+                    })
                     true
                 }
                 else -> super.onTouchEvent(motionEvent)
@@ -207,4 +204,30 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         canvas.drawText(actionText, textX, actionTextY, actionTextPaint)
     }
 
+    /**
+     * Animates change from one from one color to another. Uses [ValueAnimator] and [ArgbEvaluator] to
+     * interpolate color during [duration] milliseconds.
+     *
+     * [colorFrom] initial color
+     * [colorTo] final color
+     * [onColorSet] callback to be called when animated value will be available during animation updates
+     * [interpolator] animator interpolator
+     * [duration] animation duration
+     */
+    private inline fun animateColorChange(colorFrom: Int,
+                                          colorTo: Int,
+                                          crossinline onColorSet: (color: Int) -> Unit,
+                                          interpolator: TimeInterpolator = animationInterpolator,
+                                          duration: Long = colorAnimDuration) {
+        ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo).apply {
+            this.interpolator = interpolator
+            this.duration = duration
+            addUpdateListener {
+                val colorValue = animatedValue as Int
+                onColorSet(colorValue)
+                invalidate()
+            }
+            start()
+        }
+    }
 }
