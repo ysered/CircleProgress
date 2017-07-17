@@ -42,6 +42,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private val progressPathPaint: Paint
     private val progressTextPaint: Paint
     private val actionTextPaint: Paint
+    private var isDrawProgress = true
 
     private val animationInterpolator by lazy { DecelerateInterpolator() }
 
@@ -141,11 +142,14 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
                 MotionEvent.ACTION_DOWN -> {
                     progressPathPaint.color = selectedColor
                     actionTextPaint.color = selectedColor
+                    isDrawProgress = false
                     invalidate()
                     true
                 }
                 MotionEvent.ACTION_UP -> {
                     progressPathPaint.color = Color.LTGRAY
+                    actionTextPaint.color = Color.LTGRAY
+                    isDrawProgress = true
                     invalidate()
                     true
                 }
@@ -189,7 +193,9 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawCircle(progressX, progressY, progressRadius, progressPathPaint)
-        canvas.drawArc(progressBounds, 90f, sweepAngle, false, progressPaint)
+        if (isDrawProgress) {
+            canvas.drawArc(progressBounds, 90f, sweepAngle, false, progressPaint)
+        }
         canvas.drawText(progressText, textX, progressTextY, progressTextPaint)
         canvas.drawText(actionText, textX, actionTextY, actionTextPaint)
     }
