@@ -106,6 +106,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         progressStrokeWidth = array.getDimension(R.styleable.CircleProgressView_progressStrokeWidth, DEFAULT_PROGRESS_STROKE_WIDTH)
         actionText = array.getString(R.styleable.CircleProgressView_actionText) ?: ""
         actionTextSize = array.getDimension(R.styleable.CircleProgressView_actionTextSize, 32f)
+        val unselectedColor = array.getColor(R.styleable.CircleProgressView_unselectedColor, Color.BLACK)
         val selectedColor = array.getColor(R.styleable.CircleProgressView_selectedColor, Color.RED)
         progressTextSize = array.getDimension(R.styleable.CircleProgressView_progressTextSize, 32f)
         array.recycle()
@@ -120,14 +121,14 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
 
         progressPathPaint = Paint().apply {
             isAntiAlias = true
-            color = Color.LTGRAY
+            color = unselectedColor
             style = Paint.Style.STROKE
             strokeWidth = progressStrokeWidth
         }
 
         progressTextPaint = Paint().apply {
             isAntiAlias = true
-            color = Color.LTGRAY
+            color = unselectedColor
             strokeWidth = 0f
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
@@ -148,8 +149,8 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    progressPathPaint.color = Color.LTGRAY
-                    actionTextPaint.color = Color.LTGRAY
+                    progressPathPaint.color = unselectedColor
+                    actionTextPaint.color = unselectedColor
                     isDrawProgress = true
                     invalidate()
                     true

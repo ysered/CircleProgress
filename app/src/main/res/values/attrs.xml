@@ -19,6 +19,7 @@
 
     <declare-styleable name="CircleProgressView">
         <attr name="progressStrokeWidth"/>
+        <attr name="unselectedColor" format="color"/>
         <attr name="selectedColor" format="color"/>
         <attr name="actionText" format="string"/>
         <attr name="actionTextSize" format="dimension"/>

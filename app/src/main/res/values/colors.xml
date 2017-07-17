@@ -10,4 +10,10 @@
     <color name="endProgressColor">#b9000d</color>
     <color name="progressPathColor">#aeaeae</color>
     <color name="progressTextColor">#7e7e7e</color>
+    <color name="goodStart">#1B5E20</color>
+    <color name="goodEnd">#81C784</color>
+    <color name="normalStart">#FFF176</color>
+    <color name="normalEnd">#F57F17</color>
+    <color name="badStart">#FFCDD2</color>
+    <color name="badEnd">#F44336</color>
 </resources>

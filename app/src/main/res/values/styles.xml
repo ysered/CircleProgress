@@ -21,11 +21,12 @@
 
     <style name="CircleProgressStyle">
         <item name="progressStrokeWidth">4dp</item>
-        <item name="selectedColor">#75dacf</item>
+        <item name="unselectedColor">#9E9E9E</item>
+        <item name="selectedColor">#424242</item>
         <item name="actionText">ACTION</item>
         <item name="actionTextSize">20sp</item>
         <item name="progressTextSize">40sp</item>
-        <item name="progressTextColor">@color/progressPathColor</item>
+        <item name="progressTextColor">#616161</item>
     </style>
 
 </resources>
