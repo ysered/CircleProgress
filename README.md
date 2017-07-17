@@ -2,7 +2,7 @@
 This sample project shows how to develop custom progress view.
 You can modify it for more adjustments.
 
-Currently there are two version of circular progress: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt) and [CircleProgressView.kt] (https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.kt)
+Currently there are two version of circular progress: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt) and [CircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.kt)
 
 ### How it looks like?
 
