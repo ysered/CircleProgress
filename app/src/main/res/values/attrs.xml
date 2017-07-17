@@ -25,5 +25,7 @@
         <attr name="actionTextSize" format="dimension"/>
         <attr name="progressTextSize" format="dimension"/>
         <attr name="progressTextColor"/>
+        <attr name="colorAnimDuration" format="integer"/>
+        <attr name="progressAnimDuration" format="integer"/>
     </declare-styleable>
 </resources>

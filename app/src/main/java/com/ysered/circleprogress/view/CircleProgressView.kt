@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.ysered.circleprogress.R
-import com.ysered.circleprogress.debug
 
 class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
     : View(context, attrs, defStyleAttr) {
@@ -22,6 +21,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     // defaults
     private val DP_IN_PX = Resources.getSystem().displayMetrics.density
     private val DEFAULT_PROGRESS_STROKE_WIDTH = 16 * DP_IN_PX
+    private val DEFAULT_ANIM_DURATION = 300
 
     // coordinates
     private lateinit var progressBounds: RectF
@@ -37,6 +37,8 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private val progressTextSize: Float
     private val actionTextSize: Float
     private val progressStrokeWidth: Float
+    private val progressAnimDuration: Long
+    private val colorAnimDuration: Long
 
     // paints
     private val progressPaint: Paint
@@ -55,7 +57,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
             field = value
             ValueAnimator.ofFloat(sweepAngle, 360f / 100f * progress).apply {
                 interpolator = animationInterpolator
-                duration = 300 // TODO: move to properties
+                duration = progressAnimDuration
                 addUpdateListener { animation ->
                     sweepAngle = animation.animatedValue as Float
                     invalidate()
@@ -82,8 +84,8 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         set(value) {
             if (field != value) {
                 ValueAnimator.ofObject(ArgbEvaluator(), field, value).apply {
-                    interpolator = DecelerateInterpolator() // TODO: create once?
-                    duration = 300 // TODO: move to properties
+                    interpolator = animationInterpolator
+                    duration = colorAnimDuration
                     addUpdateListener {
                         val colorValue = animatedValue as Int
                         progressPaint.color = colorValue
@@ -109,6 +111,8 @@ class CircleProgressView(context: Context, attrs: AttributeSet?, defStyleAttr: I
         val unselectedColor = array.getColor(R.styleable.CircleProgressView_unselectedColor, Color.BLACK)
         val selectedColor = array.getColor(R.styleable.CircleProgressView_selectedColor, Color.RED)
         progressTextSize = array.getDimension(R.styleable.CircleProgressView_progressTextSize, 32f)
+        colorAnimDuration = array.getInt(R.styleable.CircleProgressView_colorAnimDuration, DEFAULT_ANIM_DURATION).toLong()
+        progressAnimDuration = array.getInt(R.styleable.CircleProgressView_progressAnimDuration, DEFAULT_ANIM_DURATION).toLong()
         array.recycle()
 
         progressPaint = Paint().apply {
