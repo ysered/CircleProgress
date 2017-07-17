@@ -5,7 +5,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="CircleProgressStyle">
+    <style name="SemiCircleProgressStyle">
         <item name="showGradientProgress">true</item>
         <item name="progressBackgroundColor">@color/progressBackground</item>
         <item name="progressPathColor">@color/progressPathColor</item>
@@ -18,4 +18,14 @@
         <item name="endAngle">270</item>
         <item name="maxProgress">100</item>
     </style>
+
+    <style name="CircleProgressStyle">
+        <item name="progressStrokeWidth">4dp</item>
+        <item name="selectedColor">#75dacf</item>
+        <item name="actionText">ACTION</item>
+        <item name="actionTextSize">20sp</item>
+        <item name="progressTextSize">40sp</item>
+        <item name="progressTextColor">@color/progressPathColor</item>
+    </style>
+
 </resources>

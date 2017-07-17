@@ -1,33 +1,26 @@
 package com.ysered.circleprogress
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.SeekBar
-import com.ysered.circleprogress.view.CircleProgressViewKt
+import android.view.View
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
-        val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
-        progressBar.progress = progressSeekBar.progress
+        listOf(R.id.firstButton, R.id.secondButton)
+                .forEach { findViewById(it).setOnClickListener(this@MainActivity) }
+    }
 
-        progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                progressBar.progress = progress
-                progressBar.progressText = when (progress) {
-                    in 0..40 -> "Good"
-                    in 40..70 -> "Normal"
-                    else -> "Bad"
-                }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+    override fun onClick(view: View) {
+        val activityClass = when (view.id) {
+            R.id.firstButton -> FirstActivity::class.java
+            R.id.secondButton -> SecondActivity::class.java
+            else -> throw RuntimeException("OnClick for ${view.id} not implemented")
+        }
+        startActivity(Intent(this, activityClass))
     }
 }

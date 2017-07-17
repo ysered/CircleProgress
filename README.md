@@ -2,22 +2,13 @@
 This sample project shows how to develop custom progress view.
 You can modify it for more adjustments.
 
-#### Currently this view supports attributes: 
-* progress gradient colors
-* progress path color
-* progress line width
-* progress text
-
-You can take a look on its implementation: [CircleProgressView.java](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.java)
-
-For those who interested in learning Kotlin you can find same implementation in this language: [CircleProgressViewKt.kt](https://github.com/ysered/CircleProgress/blob/master/app/src/main/java/com/ysered/circleprogress/view/CircleProgressViewKt.kt)
+Currently there are two version of circular progress: [SemiCircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/SemiCircleProgressView.kt) and [CircleProgressView.kt](https://github.com/ysered/CircleProgress/blob/progress-new/app/src/main/java/com/ysered/circleprogress/view/CircleProgressView.kt)
 
 ### How it looks like?
 
-**Layout**
+**SemiCircleProgressView**
 ```xml
-<com.ysered.circleprogress.view.CircleProgressViewKt
-    android:id="@+id/progressBar"
+<com.ysered.circleprogress.view.SemiCircleProgressView
     android:layout_width="200dp"
     android:layout_height="200dp"
     app:roundedProgressStroke="true"
@@ -32,27 +23,24 @@ For those who interested in learning Kotlin you can find same implementation in 
     app:maxProgress="100" />
 ```
 
-**Inside activity**
-```kotlin
-//...   
-val progressBar = findViewById(R.id.progressBar) as CircleProgressViewKt
-val progressSeekBar = findViewById(R.id.seekBar) as SeekBar
-progressBar.progress = progressSeekBar.progress
+<p align="center">
+    <img alt="Progress View" src="http://i.imgur.com/eYjHRv5.png" />
+</p>
 
-progressSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        progressBar.progress = progress
-        progressBar.progressText = when (progress) {
-            in 0..40 -> "Good"
-            in 40..70 -> "Normal"
-            else -> "Bad"
-        }
-    }
-    //...
-}
-//...
+**CircleProgressView**
+
+```xml
+<com.ysered.circleprogress.view.CircleProgressView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        progressStrokeWidth="4dp"
+        selectedColor="#75dacf"
+        actionText="ACTION"
+        actionTextSize="20sp"
+        progressTextSize="40sp"
+        progressTextColor="#aeaeae" />
 ```
 
 <p align="center">
-    <img alt="Progress View" src="http://i.imgur.com/eYjHRv5.png" />
+    <img alt="Progress View" src="http://i.imgur.com/nzFNhZD.png" />
 </p>
