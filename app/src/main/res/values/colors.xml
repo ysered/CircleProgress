@@ -15,5 +15,5 @@
     <color name="normalStart">#FFF176</color>
     <color name="normalEnd">#F57F17</color>
     <color name="badStart">#FFCDD2</color>
-    <color name="badEnd">#F44336</color>
+    <color name="badEnd">#C62828</color>
 </resources>
